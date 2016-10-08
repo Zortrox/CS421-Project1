@@ -1,4 +1,4 @@
-/*package Project1;*/
+package cs421project1;
 
 import java.util.Scanner;
 
