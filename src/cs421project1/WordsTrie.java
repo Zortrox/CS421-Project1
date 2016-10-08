@@ -16,8 +16,10 @@ public class WordsTrie {
 		return true;
 	}
 
-	//returns an array of words matching the length of the given parameter
-	public ArrayList<String> getWords(String number, int length) {
-		return new ArrayList<String>();
+	//returns arrays of words that can be made
+	//will return array of size 1 if length of words is 10 or 7
+	//and size 2 for words length 3 and 4
+	public ArrayList< ArrayList<String> > getWords(String number) {
+		return new ArrayList< ArrayList<String> >();
 	}
 }
