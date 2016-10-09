@@ -1,10 +1,11 @@
 package cs421project1;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class NumberMapping {
-	static char[][] digits = {{}, {}, {'a', 'b', 'c'}, {'d', 'e', 'f'}, {'g', 'h', 'i'}, {'j', 'k', 'l'}, {'m', 'n', 'o'}, {'p', 'q', 'r', 's'}, {'t', 'u', 'v'}, {'w', 'x', 'y', 'z'}};
-	public static void main(String args[]){
+
+	public static void main(String args[]) {
 		Scanner in = new Scanner(System.in);
 		boolean valid = false;
 		String phone = "";
@@ -54,22 +55,15 @@ public class NumberMapping {
 			}
 			
 			valid = true;
-		}
+		}		
 		
-		boolean foundWord = false;
-		boolean allPerms = false;
-		String w = null;
-		String[] words = null;
-		
-		do{
-			if((area + number + exchange).contains("0") || (area + number + exchange).contains("1")){
-				break;
-			}
-			
-		} while(words != null);
+		WordsTrie vocab = new WordsTrie();
 
-		if (words == null){
-			
-		}
+		vocab.addWord("whizzbangs");
+		vocab.addWord("zzbangs");
+		vocab.addWord("angs");
+
+		ArrayList< ArrayList<String> > words = vocab.getWords(area + exchange + number);
+		System.out.println(words.get(0).get(0));
 	}
 }
