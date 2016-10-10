@@ -92,15 +92,41 @@ public class NumberMapping {
 				//get word from phone number
 				ArrayList<ArrayList<String>> words = vocab.getWords(area + exchange + number);
 
-				if (words.get(0).size() > 0) {
+				if (words.size() == 1 || (words.size() == 2 && words.get(0).get(0).length() > 4)) {
 					for (int i = 0; i < words.size(); i++) {
-						for (int j = 0; j < words.get(i).size(); j++) {
-							System.out.println(words.get(i).get(j));
+						int len = words.get(i).get(0).length();
+						if (len == 10) {
+							for (int j = 0; j < words.get(i).size(); j++) {
+								System.out.println("1-" + words.get(i).get(j).toUpperCase());
+							}
+						} else if (len == 7) {
+							for (int j = 0; j < words.get(i).size(); j++) {
+								System.out.println("1-" + area + "-" + words.get(i).get(j).toUpperCase());
+							}
+						} else if (len == 3) {
+							for (int j = 0; j < words.get(i).size(); j++) {
+								System.out.println("1-" + area + "-" + words.get(i).get(j).toUpperCase()
+										+ "-" + number);
+							}
+						} else if (len == 4) {
+							for (int j = 0; j < words.get(i).size(); j++) {
+								System.out.println("1-" + area + "-" + exchange + "-"
+										+ words.get(i).get(j).toUpperCase());
+							}
+						}
+					}
+					System.out.println();
+				} else if (words.size() == 2) {
+					for (int i = 0; i < words.get(0).size(); i++) {
+						for (int j = 0; j < words.get(1).size(); j++) {
+							System.out.println("1-" + area + "-" + words.get(0).get(i).toUpperCase() + "-"
+									+ words.get(1).get(j).toUpperCase());
 						}
 					}
 					System.out.println();
 				} else {
-					System.out.println("No words found for that number.\n");
+					System.out.println("1-" + area + "-" + exchange + "-" + number);
+					System.out.println();
 				}
 			}
 		}

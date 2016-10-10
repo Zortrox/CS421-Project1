@@ -78,9 +78,10 @@ public class WordsTrie {
 				new ArrayList<>(Arrays.asList('m', 'n', 'o')), new ArrayList<>(Arrays.asList('p', 'q', 'r', 's')),
 				new ArrayList<>(Arrays.asList('t', 'u', 'v')), new ArrayList<>(Arrays.asList('w', 'x', 'y', 'z'))));
 
-		ArrayList<SubGrouping> finalLetters = new ArrayList<>();
+		ArrayList< ArrayList<String> > wordGroup = new ArrayList<>();
 
 		for (int loop = 0; loop < 4; loop++) {
+			ArrayList<SubGrouping> finalLetters = new ArrayList<>();
 			int wordLength;
 			int startIndex;
 			switch(loop) {
@@ -142,12 +143,15 @@ public class WordsTrie {
 
 			//break if a word in the grouping was found
 			//don't break if searching for 3 & 4 letter words
-			if (finalLetters.size() != 0 && loop != 2 && loop != 3) break;
-		}
+			if (finalLetters.size() != 0) {
+				ArrayList<String> words = reverseWords(finalLetters);
+				wordGroup.add(words);
+			}
 
-		ArrayList<String> words = reverseWords(finalLetters);
-		ArrayList< ArrayList<String> > wordGroup = new ArrayList<>();
-		wordGroup.add(words);
+			if (wordGroup.size() != 0 && loop != 0 && loop != 2) {
+				break;
+			}
+		}
 
 		return wordGroup;
 	}
