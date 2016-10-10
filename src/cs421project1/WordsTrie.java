@@ -39,6 +39,7 @@ public class WordsTrie {
 	//returns false otherwise
 	public boolean addWord(String word) {
 		int len = word.length();
+		word = word.toLowerCase().trim();
 		if (len == 10 || len == 7 || len == 4 || len == 3) {
 			word += '\0';
 			ArrayList<SubGrouping> currentArray = arrWords;
@@ -47,7 +48,7 @@ public class WordsTrie {
 			int depth = 0;
 			SubGrouping parent = null;
 			for (int i = 0; i < word.length(); i++) {
-				if ((index = currentArray.indexOf(word.charAt(i))) != -1) {
+				if ((index = indexOfChar(currentArray, word.charAt(i))) != -1) {
 					parent = currentArray.get(index);
 					currentArray = parent.subLetters;
 				} else {
@@ -105,7 +106,7 @@ public class WordsTrie {
 					break;
 			}
 
-			Stack<SubGrouping> stack = new Stack<SubGrouping>();
+			Stack<SubGrouping> stack = new Stack<>();
 
 			for (int j = 0; j < digits.get(Integer.parseInt("" + number.charAt(startIndex))).size(); j++) {
 				int phoneInt = Integer.parseInt("" + number.charAt(startIndex));
@@ -140,7 +141,8 @@ public class WordsTrie {
 			}
 
 			//break if a word in the grouping was found
-			if (finalLetters.size() != 0) break;
+			//don't break if searching for 3 & 4 letter words
+			if (finalLetters.size() != 0 && loop != 2 && loop != 3) break;
 		}
 
 		ArrayList<String> words = reverseWords(finalLetters);
